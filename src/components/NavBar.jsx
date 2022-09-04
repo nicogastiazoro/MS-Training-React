@@ -5,7 +5,7 @@ function NavBar() {
 <nav className="navbar navbar-expand-lg bg-light">
   <div className="container-fluid">
     <a className="navbar-brand" href="#">
-        <img src="/assets/LOGO_MS_TRAINING.jpg" width="60px"/>
+        <img src="/assets/logo.jpg" width="60px"/>
     </a>
     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span className="navbar-toggler-icon"></span>

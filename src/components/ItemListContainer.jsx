@@ -1,31 +1,29 @@
 import { useEffect, useState } from "react";
 import ItemList from "./ItemList";
 import Container from "react-bootstrap/esm/Container";
+import itemsJson from "../itemsJson.json"
 
 const ItemListContainer = ( {greeting} ) => {
 
     const [items, setItems] = useState ([]);
 
-    useEffect( () => {
-      
-      const getItems = new Promise((resolve, reject) => {
-        const productos = [{id:1342,title:'Mancuerna',price:2142.50,pictureUrl:'/assets/products/1234.png'},
-                           {id:2341,title:'Disco',price:1231.50,pictureUrl:'/assets/products/2341.png'},
-                           {id:5235,title:'Colchoneta',price:643.50,pictureUrl:'/assets/products/5235.png'},
-                           {id:1512,title:'Barra',price:34532,pictureUrl:'/assets/products/1512.png'},
-                           {id:9134,title:'Pesa Rusa',price:14124,pictureUrl:'/assets/products/9134.png'}]  
+    const getItems = (data,time) => 
+      new Promise((resolve, reject) => {
         setTimeout( () => {
-          resolve (productos);
-        },2000)
-      })
+        if(data){
+          resolve(data);
+        }else{
+          reject("Error");
+        }
+      },time)
+    })
 
-      getItems.then(data => {
-        setItems(data);
+    useEffect( () => {
+      getItems(itemsJson,2000).then(res => {
+        setItems(res);
       })
-      .catch(err => {console.log(err);})
+      .catch(err => {console.log(err,": no hay items para mostrar");})
     },[])
-
-
     return (
       <Container>
         <ItemList items={items}/>
