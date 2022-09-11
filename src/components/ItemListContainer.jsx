@@ -33,7 +33,6 @@ const ItemListContainer = ({ greeting }) => {
   });
   return (
     <Container>
-      <h1 className="display-3 text-center">Tienda MS</h1>
       <ItemList items={items} />
     </Container>
   );
