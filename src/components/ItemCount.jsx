@@ -24,7 +24,7 @@ const handleSubtract = () => {
           <Col className='ms-5'>
               <Button onClick={handleSubtract} variant="outline-secondary">-</Button>
           </Col>
-          <Col><Card.Text>
+          <Col><Card.Text className="text-center">
           {counter}
           </Card.Text></Col>
           <Col className='me-5'>

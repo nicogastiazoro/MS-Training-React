@@ -1,33 +1,41 @@
 import { useEffect, useState } from "react";
 import ItemList from "./ItemList";
 import Container from "react-bootstrap/esm/Container";
-import itemsJson from "../itemsJson.json"
+import itemsJson from "../itemsJson.json";
+import products from "./products";
+import { useParams } from "react-router-dom";
 
-const ItemListContainer = ( {greeting} ) => {
+const ItemListContainer = ({ greeting }) => {
+  const [items, setItems] = useState([]);
+  const { category } = useParams();
 
-    const [items, setItems] = useState ([]);
-
-    const getItems = (data,time) => 
-      new Promise((resolve, reject) => {
-        setTimeout( () => {
-        if(data){
+  const getItems = (data, time) =>
+    new Promise((resolve, reject) => {
+      setTimeout(() => {
+        if (data) {
           resolve(data);
-        }else{
+        } else {
           reject("Error");
         }
-      },time)
-    })
+      }, time);
+    });
 
-    useEffect( () => {
-      getItems(itemsJson,2000).then(res => {
-        setItems(res);
+  useEffect(() => {
+    getItems(products, 2000)
+      .then((res) => {
+        console.log(res);
+        console.log(category)
+        category ? setItems(res.filter( p => p.category == category)) : setItems(res);
       })
-      .catch(err => {console.log(err,": no hay items para mostrar");})
-    },[])
-    return (
-      <Container>
-        <ItemList items={items}/>
-      </Container>
-    );
-  }
-  export default ItemListContainer  
+      .catch((err) => {
+        console.log(err, ": no hay items para mostrar");
+      });
+  });
+  return (
+    <Container>
+      <h1 className="display-3 text-center">Tienda MS</h1>
+      <ItemList items={items} />
+    </Container>
+  );
+};
+export default ItemListContainer;
