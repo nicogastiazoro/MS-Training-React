@@ -1,6 +1,8 @@
 import { Card } from "react-bootstrap";
 import ItemCount from "./ItemCount";
 import {Col} from "react-bootstrap";
+import {Button} from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 
 function Item({item}) {
@@ -17,7 +19,9 @@ return(
                         $ {Number.parseFloat(item.price).toFixed(2)}
                     </span>
                 </Card.Text>
-                <ItemCount stock={5} initial={1}/>
+                <Link to={`/item/${item.id}`} key={item.id}>
+                <Button variant="outline-dark" className="mt-4 ">Ver detalle de productoo</Button>
+                </Link>
             </Card.Body>
         </Card>
     </Col>

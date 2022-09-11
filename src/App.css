@@ -3,3 +3,8 @@
     margin: auto;
     align-items: center
 }
+
+a{
+    text-decoration: none !important;
+    color: black !important;
+}
