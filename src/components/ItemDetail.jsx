@@ -1,10 +1,22 @@
 import React from "react";
-import { Card, Container } from "react-bootstrap";
+import { Card } from "react-bootstrap";
 import ItemCount from "./ItemCount";
-import { Col } from "react-bootstrap";
-import {Button} from "react-bootstrap";
+import { useState } from "react";
+import { useItems } from "./CartContext";
 
 const ItemDetail = ({ item }) => {
+
+  const {addItem} = useItems();
+
+  const [counter,setCounter] = useState(0);
+
+  const onAdd = (quantityToAdd) =>{
+    setCounter(quantityToAdd)
+    addItem(item,quantityToAdd)
+  }
+
+
+  
   return (
       <Card className="py-4 " style={{ width: "18rem" }}>
         <Card.Img
@@ -30,8 +42,7 @@ const ItemDetail = ({ item }) => {
           <Card.Text className=''>  
             <span>$ {Number.parseFloat(item.price).toFixed(2)}</span>
           </Card.Text>
-          <ItemCount className="text-center" stock={5} initial={1} />
-          <Button variant="outline-success" className="my-3 ">Agregar a Carrito</Button>
+          <ItemCount className="text-center" stock={5} initial={1} onAdd={onAdd} />
         </Card.Body>
       </Card>
   );
