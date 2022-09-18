@@ -3,20 +3,21 @@ import { Card } from "react-bootstrap";
 import ItemCount from "./ItemCount";
 import { useState } from "react";
 import { useItems } from "./CartContext";
+import { Button } from "react-bootstrap";
 
 const ItemDetail = ({ item }) => {
 
   const {addItem} = useItems();
 
-  const [counter,setCounter] = useState(0);
+  const [flagItemCount,setFlagItemCount] = useState(true);
 
   const onAdd = (quantityToAdd) =>{
-    setCounter(quantityToAdd)
+    
+    setFlagItemCount(!flagItemCount)
+
     addItem(item,quantityToAdd)
   }
 
-
-  
   return (
       <Card className="py-4 " style={{ width: "18rem" }}>
         <Card.Img
@@ -42,7 +43,14 @@ const ItemDetail = ({ item }) => {
           <Card.Text className=''>  
             <span>$ {Number.parseFloat(item.price).toFixed(2)}</span>
           </Card.Text>
-          <ItemCount className="text-center" stock={5} initial={1} onAdd={onAdd} />
+          { 
+            flagItemCount ?
+            <ItemCount className="text-center" stock={5} initial={1} onAdd={onAdd}/>
+            :
+            <Button variant="outline-success">
+              Finalizar Compra
+            </Button>
+            }
         </Card.Body>
       </Card>
   );

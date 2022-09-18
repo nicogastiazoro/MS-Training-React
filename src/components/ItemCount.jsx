@@ -15,8 +15,6 @@ function ItemCount({ stock, initial, onAdd }) {
     }
   };
 
-  const {items} = useItems()
-
   const handleSubtract = () => {
     if (counter > 1) {
       setCounter(counter - 1);
@@ -39,10 +37,7 @@ function ItemCount({ stock, initial, onAdd }) {
           </Button>
         </Col>
       </Row>
-      <Button onClick={() => { onAdd(counter)
-        console.log(items)
-      
-      }} variant="outline-success" className="my-3 ">
+      <Button onClick={() => { onAdd(counter)}} variant="outline-success" className="my-3 ">
         Agregar a Carrito
       </Button>
     </div>
