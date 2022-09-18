@@ -20,7 +20,7 @@ return(
                     </span>
                 </Card.Text>
                 <Link to={`/item/${item.id}`} key={item.id}>
-                <Button variant="outline-dark" className="mt-4 ">Ver detalle de productoo</Button>
+                <Button variant="outline-dark" className="mt-4 ">Ver detalle de producto</Button>
                 </Link>
             </Card.Body>
         </Card>

@@ -4,6 +4,7 @@ import ItemCount from "./ItemCount";
 import { useState } from "react";
 import { useItems } from "./CartContext";
 import { Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 const ItemDetail = ({ item }) => {
 
@@ -47,10 +48,12 @@ const ItemDetail = ({ item }) => {
             flagItemCount ?
             <ItemCount className="text-center" stock={5} initial={1} onAdd={onAdd}/>
             :
-            <Button variant="outline-success">
-              Finalizar Compra
-            </Button>
-            }
+            <Link to={`/cart`}>
+              <Button variant="outline-dark">
+                Finalizar Compra
+              </Button>
+            </Link>
+          }
         </Card.Body>
       </Card>
   );
