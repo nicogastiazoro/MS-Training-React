@@ -14,15 +14,16 @@ const CartItemsProvider = ({ defaultValue = [], children }) => {
 
   //VALIDA QUE EXISTA UN PRODUCTO EN EL CARRITO
   const isInCart = (item) => {
-    items.some((b) => b.titulo === item.titulo);
+    return items.some((b) => b.title === item.title);
   };
 
   //AGREGA UN ELEMENTO AL CARRITO
-  const addItem = (item) => {
+  const addItem = (item,quantity) => {
+    console.log(isInCart(item))
     if (isInCart(item)) {
       console.log("El item ya se encontraba cargado");
     }else{
-      const newItem = { ...item};
+      const newItem = { ...item,quantity};
       setItems([...items, newItem]);
       console.log("Item agregado al carrito");
     }
