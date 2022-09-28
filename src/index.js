@@ -3,21 +3,21 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import ItemDetailContainer from './components/ItemDetailContainer';
-import ItemListContainer from './components/ItemListContainer';
-import NavBar from './components/NavBar';
+import { initializeApp } from "firebase/app";
+
+const firebaseConfig = {
+  apiKey: process.env.REACT_APP_apiKey,
+  authDomain: process.env.REACT_APP_authDomain ,
+  projectId: process.env.REACT_APP_projectId,
+  storageBucket: process.env.REACT_APP_storageBucket ,
+  messagingSenderId: process.env.REACT_APP_messagingSenderId ,
+  appId: process.env.REACT_APP_appId
+};
+
+initializeApp(firebaseConfig);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    
-<App />
-  //   <BrowserRouter>
-  //     <NavBar/>
-  //   <Routes>
-  //     <Route path='/' element={<App />}/>
-  //     <Route path='/category/:category' element={<ItemListContainer/>}/>  
-  //     <Route path='/item/:id' element={<ItemDetailContainer/>}/>
-  //   </Routes>
-  // </BrowserRouter>
+  <App />
 );
+ 
