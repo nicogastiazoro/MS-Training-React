@@ -24,6 +24,7 @@ const CartItemsProvider = ({ defaultValue = [], children }) => {
       console.log("El item ya se encontraba cargado");
     }else{
       const newItem = { ...item,quantity};
+      console.log(items.title)
       setItems([...items, newItem]);
       console.log("Item agregado al carrito");
     }
@@ -31,6 +32,7 @@ const CartItemsProvider = ({ defaultValue = [], children }) => {
 
   //REMUEVE UN PRODUCTO DEL CARRITO
   const removeItem = (item) => {
+    console.log("Intento eliminar item")
     const removeItem = items.filter((s) => s.id !== item.id);
     return setItems(removeItem);
   };

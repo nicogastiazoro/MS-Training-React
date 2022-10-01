@@ -13,7 +13,7 @@ const ItemDetail = ({ item }) => {
   const [flagItemCount,setFlagItemCount] = useState(true);
 
   const onAdd = (quantityToAdd) =>{
-    
+    console.log(item)
     setFlagItemCount(!flagItemCount)
 
     addItem(item,quantityToAdd)

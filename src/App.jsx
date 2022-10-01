@@ -14,10 +14,9 @@ function App() {
     <CartItemsProvider>
       <BrowserRouter>
          <NavBar/>
-         <h1 className="display-3 text-center">Tienda MS</h1>
         <Routes>
           <Route path='/' element={<ItemListContainer/>}/>
-          <Route path='/category/:category' element={<ItemListContainer/>}/>  
+          <Route path='/category/:categoryId' element={<ItemListContainer/>}/>  
           <Route path='/item/:id' element={<ItemDetailContainer className="align-items-center"/>}/>
           <Route path='/cart' element={<Cart/>}/>
           

@@ -1,10 +1,8 @@
 import React from 'react'
-import Item from './Item'
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import itemsJson from "../itemsJson.json";
 import ItemDetail from './ItemDetail';
-import products from './products';
+import { getDoc,doc,getFirestore } from 'firebase/firestore';
 
 function ItemDetailContainer() {
     const { id } = useParams();
@@ -13,18 +11,22 @@ function ItemDetailContainer() {
     const getItem = (time) =>
     new Promise((resolve, reject) => {
       setTimeout(() => {
-        let product = products.find( p => p.id == id)
-        if (product) {resolve( product );}
-        else { reject("Error");} 
+        const db = getFirestore()
+        const itemRef = doc( db, 'items', id )
+        getDoc( itemRef ).then( res => {
+          const data = res.data()
+          resolve( {id: id,...data} )
+        })
       }, time);
-    });
+    },[]);
 
     useEffect(() => {
-        getItem( 2000 )
+        getItem(500)
           .then((res) => {setProducto(res);})
           .catch((err) => {console.log(err, ": No existe el componente");});
-      }, []);
-     
+        // },[]);
+        });
+
   return (
     <ItemDetail className="justify-content-center" item={producto} />
   )
