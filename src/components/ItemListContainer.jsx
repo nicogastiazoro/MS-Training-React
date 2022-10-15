@@ -14,7 +14,6 @@ const ItemListContainer = ({ greeting }) => {
       const itemCollection = collection(db, "items");
       getDocs(itemCollection).then((res) => {
         setItems(res.docs.map((d) => ({ id: d.id, ...d.data() })));
-        console.log("getProducts");
       });
     };
     const getProductsByCategory = async(categoryId) => {
@@ -23,9 +22,7 @@ const ItemListContainer = ({ greeting }) => {
       const q = query(itemCollection, where('category', '==', categoryId) )
       const snapshot = await getDocs( q )
       setItems( snapshot.docs.map( d => ({id: d.id, ...d.data()}) ) )
-      console.log("getCategories")
   }
-    console.log(categoryId)
     categoryId ? getProductsByCategory(categoryId) : getProducts();
   });
 
