@@ -6,8 +6,6 @@ import { BrowserRouter,Routes,Route } from 'react-router-dom';
 import ItemDetailContainer from './components/ItemDetailContainer';
 import {CartItemsProvider} from './components/CartContext';
 import Cart from './components/Cart';
-import ProductsContainer from './components/Firebase/ProductsContainer';
-import Category from './components/Firebase/Category';
 
 function App() {
   return (
@@ -19,10 +17,6 @@ function App() {
           <Route path='/category/:categoryId' element={<ItemListContainer/>}/>  
           <Route path='/item/:id' element={<ItemDetailContainer className="align-items-center"/>}/>
           <Route path='/cart' element={<Cart/>}/>
-          
-  
-          {/* <Route path='/products' element={<ProductsContainer/>}/>
-          <Route path='/products/category/:id' element={<Category/>}/> */}
         </Routes>
       </BrowserRouter>
     </CartItemsProvider>

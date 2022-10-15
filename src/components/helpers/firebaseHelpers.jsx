@@ -1,4 +1,4 @@
-import { collection, getDocs, getFirestore, query, where,docs } from "firebase/firestore"
+import { collection, getDocs, getFirestore, query, where } from "firebase/firestore"
 
 const getProductsByCategory = async(categoryId) => {
     const db = getFirestore()

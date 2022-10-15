@@ -1,11 +1,8 @@
 import { useEffect, useState } from "react";
 import ItemList from "./ItemList";
 import Container from "react-bootstrap/esm/Container";
-import products from "./products";
 import { useParams } from "react-router-dom";
-import { getAllProducts,getProductsByCategory } from "./helpers/firebaseHelpers";
 import { getFirestore, collection, getDocs,where,query } from "firebase/firestore";
-import Item from "./Item";
 
 const ItemListContainer = ({ greeting }) => {
   const [items, setItems] = useState([]);

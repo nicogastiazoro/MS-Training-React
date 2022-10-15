@@ -120,7 +120,7 @@ function Cart() {
               </Form.Group>
 
               <Button
-                variant="primary"
+                variant="outline-dark"
                 type="submit"
                 onClick={() => {
                   onSubmit(
