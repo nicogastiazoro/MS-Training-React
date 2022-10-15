@@ -1,15 +1,9 @@
-import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useItems } from "./CartContext";
 
 function CartWidget() {
 
     const {items} = useItems();
-    const [quantity,setQuantity] = useState(0);
-    useEffect(() => {
-        setQuantity(items.reduce( (acc, c) => acc + c.quantity, 0))
-        });
-    console.log(items.reduce( (acc, c) => acc + c.quantity, 0))
     return (
             <>
             <Link to={`/cart`}>

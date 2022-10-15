@@ -1,12 +1,12 @@
 import CartWidget from './CartWidget';
-import { Link,NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 function NavBar() {
   return (
 <nav className="navbar navbar-expand-lg bg-light">
   <div className="container-fluid">
     <NavLink className="navbar-brand" to={'/'}>
-      <img src="/assets/logo.jpg" width="60px"/>
+      <img src="/assets/logo.jpg" alt="Logo" width="60px"/>
     </NavLink>
     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span className="navbar-toggler-icon"></span>

@@ -1,10 +1,5 @@
-import { Card } from "react-bootstrap";
-import ItemCount from "./ItemCount";
-import {Col} from "react-bootstrap";
 import {Button,Image} from "react-bootstrap";
-import { Link } from "react-router-dom";
-import {Table} from "react-bootstrap";
-import { CartItemsProvider, useItems } from "./CartContext";
+import { useItems } from "./CartContext";
 
 const CartItems = () => {
 //Estructura item: {id, title, price, pictureUrl}

@@ -1,5 +1,4 @@
 import { Card } from "react-bootstrap";
-import ItemCount from "./ItemCount";
 import {Col} from "react-bootstrap";
 import {Button} from "react-bootstrap";
 import { Link } from "react-router-dom";

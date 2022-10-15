@@ -1,7 +1,6 @@
-import React, { Component } from "react";
+import React from "react";
 import { useContext } from "react";
 import { useState } from "react";
-import { uuid } from "react-uuid";
 
 const CartContext = React.createContext([]);
 

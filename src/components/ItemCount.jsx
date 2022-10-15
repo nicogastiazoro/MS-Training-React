@@ -3,8 +3,6 @@ import { Card } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import { Row } from "react-bootstrap";
 import { Col } from "react-bootstrap";
-import uuid from "react-uuid";
-import { useItems } from "./CartContext";
 
 function ItemCount({ stock, initial, onAdd }) {
   const [counter, setCounter] = useState(initial);
