@@ -15,7 +15,8 @@ const {items,removeItem} = useItems();
 return(
     <tbody>
       {items.map((item)=>
-      <tr key={item.id}>
+      <tr key={item.id} >
+        
         <td>{item.id}</td>
         <td>{item.title}</td>
         <td>$ {item.price}</td>
@@ -24,6 +25,7 @@ return(
         <td><Button variant="outline-light" onClick={() => removeItem(item)}>
           <Image src={deleteImg} width={25}/>
           </Button></td>
+          
       </tr>
       )}
     </tbody>
