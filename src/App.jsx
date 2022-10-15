@@ -20,9 +20,9 @@ function App() {
           <Route path='/item/:id' element={<ItemDetailContainer className="align-items-center"/>}/>
           <Route path='/cart' element={<Cart/>}/>
           
-          //!PRUEBA FIREBASE
-          <Route path='/products' element={<ProductsContainer/>}/>
-          <Route path='/products/category/:id' element={<Category/>}/>
+  
+          {/* <Route path='/products' element={<ProductsContainer/>}/>
+          <Route path='/products/category/:id' element={<Category/>}/> */}
         </Routes>
       </BrowserRouter>
     </CartItemsProvider>
