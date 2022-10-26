@@ -4,7 +4,7 @@ import Container from "react-bootstrap/esm/Container";
 import { useParams } from "react-router-dom";
 import { getFirestore, collection, getDocs,where,query } from "firebase/firestore";
 
-const ItemListContainer = ({ greeting }) => {
+const ItemListContainer = () => {
   const [items, setItems] = useState([]);
   const { categoryId } = useParams();
 
@@ -24,7 +24,7 @@ const ItemListContainer = ({ greeting }) => {
       setItems( snapshot.docs.map( d => ({id: d.id, ...d.data()}) ) )
   }
     categoryId ? getProductsByCategory(categoryId) : getProducts();
-  });
+  }, [items]);
 
   return (
     <Container>
