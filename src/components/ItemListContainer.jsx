@@ -8,23 +8,26 @@ const ItemListContainer = () => {
   const [items, setItems] = useState([]);
   const { categoryId } = useParams();
 
+
+  const getProducts = () => {
+    const db = getFirestore();
+    const itemCollection = collection(db, "items");
+    getDocs(itemCollection).then((res) => {
+      setItems(res.docs.map((d) => ({ id: d.id, ...d.data() })));
+    });
+  };
+  const getProductsByCategory = async(categoryId) => {
+    const db = getFirestore()
+    const itemCollection = collection( db, 'items' )
+    const q = query(itemCollection, where('category', '==', categoryId) )
+    const snapshot = await getDocs( q )
+    setItems( snapshot.docs.map( d => ({id: d.id, ...d.data()}) ) )
+}
+
   useEffect(() => {
-    const getProducts = () => {
-      const db = getFirestore();
-      const itemCollection = collection(db, "items");
-      getDocs(itemCollection).then((res) => {
-        setItems(res.docs.map((d) => ({ id: d.id, ...d.data() })));
-      });
-    };
-    const getProductsByCategory = async(categoryId) => {
-      const db = getFirestore()
-      const itemCollection = collection( db, 'items' )
-      const q = query(itemCollection, where('category', '==', categoryId) )
-      const snapshot = await getDocs( q )
-      setItems( snapshot.docs.map( d => ({id: d.id, ...d.data()}) ) )
-  }
     categoryId ? getProductsByCategory(categoryId) : getProducts();
-  }, [items]);
+    console.log("useEffect ItemListContainer");
+  }, [categoryId]);
 
   return (
     <Container>
