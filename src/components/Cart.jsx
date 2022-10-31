@@ -6,9 +6,14 @@ import CartItems from "./CartItems";
 import Form from "react-bootstrap/Form";
 import { useRef } from "react";
 import { Link } from "react-router-dom";
-import { addDoc, collection, doc, getDocs, getFirestore, updateDoc } from "firebase/firestore";
-import Swal from 'sweetalert2'
-
+import {
+  addDoc,
+  collection,
+  doc,
+  getFirestore,
+  updateDoc,
+} from "firebase/firestore";
+import Swal from "sweetalert2";
 
 function Cart() {
   const { items, clear } = useItems();
@@ -18,70 +23,47 @@ function Cart() {
     evt.stopPropagation();
 
     const order = {
-      buyer: { name: name.current.value, 
-              phone: phone.current.value,
-              email: email.current.value },
-      items: {...items},
+      buyer: {
+        name: name.current.value,
+        phone: phone.current.value,
+        email: email.current.value,
+      },
+      items: { ...items },
       cantidadItems: items.reduce((acc, c) => acc + c.quantity, 0),
-      total: items.reduce((acc, c) => acc + c.price * c.quantity, 0)
-  }
-  console.log(order);
+      total: items.reduce((acc, c) => acc + c.price * c.quantity, 0),
+    };
+    console.log(order);
 
-  const db = getFirestore()
-  const orderCollection = collection(db, 'orders')
+    const db = getFirestore();
+    const orderCollection = collection(db, "orders");
 
-  addDoc(orderCollection, order).then(({ id }) => {
-    console.log({ id })
-    // debugger
-    Swal.fire({
-      position: "center",
-      icon: 'success',
-      title: 'Su orden fue generada con exito',
-      showConfirmButton: false,
-      timer: 1500
-    })
-    
-    items.map(d => {
+    addDoc(orderCollection, order).then(({ id }) => {
+      console.log({ id });
+      // debugger
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Su orden fue generada con exito",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+
+      items.map((d) => {
         let docRef = doc(db, "items", d.id);
-        let data = {sold: d.quantity}
+        let data = { sold: d.quantity };
         updateDoc(docRef, data)
-        .then(docRef => {
+          .then((docRef) => {
             console.log("Value of an Existing Document Field has been updated");
-        })
-        .catch(error => {
+          })
+          .catch((error) => {
             console.log(error);
-        })
-        console.log(d.id, d.quantity)
-        return true
-    })
-    clear();
-
-    
-
-  
-})
-    
+          });
+        console.log(d.id, d.quantity);
+        return true;
+      });
+      clear();
+    });
   };
-  // const orderHandler = () => {
-  //   console.log('Terminando orden..');
-
-  //   const db = getFirestore()
-  //   const orderCollection = collection(db, 'orders')
-
-  //   addDoc(orderCollection, order).then( ({id}) => {
-  //       console.log( {id} );
-  //   })
-  // }
-
-  // const updateHanlder = () => {
-  //   const db = getFirestore()
-  //   const orderCollection = collection(db, 'orders')
-  //   const orderDoc = doc(orderCollection, "BjkGzewonWKdOaKYIfjo")
-  //   updateDoc( orderDoc, {
-  //       price:222,
-  //       buyer: { name: 'Carlos', phone: 55555, email: 'carlos@gmail.com' },
-  //   }).then( res => { console.log('res: ' + res) } )
-  // }
 
   const name = useRef(null);
   const phone = useRef(null);
@@ -168,18 +150,7 @@ function Cart() {
                 />
               </Form.Group>
 
-              <Button
-                variant="outline-dark"
-                type="submit"
-                onClick={
-                  onSubmit
-                  // onSubmit(
-                  //   name.current.value,
-                  //   email.current.value,
-                  //   phone.current.value
-                  // );
-              }
-              >
+              <Button variant="outline-dark" type="submit" onClick={onSubmit}>
                 Comprar
               </Button>
             </Form>
