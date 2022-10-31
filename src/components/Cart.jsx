@@ -6,12 +6,61 @@ import CartItems from "./CartItems";
 import Form from "react-bootstrap/Form";
 import { useRef } from "react";
 import { Link } from "react-router-dom";
+import { addDoc, collection, doc, getDocs, getFirestore, updateDoc } from "firebase/firestore";
+import Swal from 'sweetalert2'
+
 
 function Cart() {
   const { items, clear } = useItems();
 
-  const onSubmit = (name, email, phone) => {
-    console.log(name + " " + email + " " + phone);
+  const onSubmit = (evt) => {
+    evt.preventDefault();
+    evt.stopPropagation();
+
+    const order = {
+      buyer: { name: name.current.value, 
+              phone: phone.current.value,
+              email: email.current.value },
+      items: {...items},
+      cantidadItems: items.reduce((acc, c) => acc + c.quantity, 0),
+      total: items.reduce((acc, c) => acc + c.price * c.quantity, 0)
+  }
+  console.log(order);
+
+  const db = getFirestore()
+  const orderCollection = collection(db, 'orders')
+
+  addDoc(orderCollection, order).then(({ id }) => {
+    console.log({ id })
+    // debugger
+    Swal.fire({
+      position: "center",
+      icon: 'success',
+      title: 'Su orden fue generada con exito',
+      showConfirmButton: false,
+      timer: 1500
+    })
+    
+    items.map(d => {
+        let docRef = doc(db, "items", d.id);
+        let data = {sold: d.quantity}
+        updateDoc(docRef, data)
+        .then(docRef => {
+            console.log("Value of an Existing Document Field has been updated");
+        })
+        .catch(error => {
+            console.log(error);
+        })
+        console.log(d.id, d.quantity)
+        return true
+    })
+    clear();
+
+    
+
+  
+})
+    
   };
   // const orderHandler = () => {
   //   console.log('Terminando orden..');
@@ -122,13 +171,14 @@ function Cart() {
               <Button
                 variant="outline-dark"
                 type="submit"
-                onClick={() => {
-                  onSubmit(
-                    name.current.value,
-                    email.current.value,
-                    phone.current.value
-                  );
-                }}
+                onClick={
+                  onSubmit
+                  // onSubmit(
+                  //   name.current.value,
+                  //   email.current.value,
+                  //   phone.current.value
+                  // );
+              }
               >
                 Comprar
               </Button>
